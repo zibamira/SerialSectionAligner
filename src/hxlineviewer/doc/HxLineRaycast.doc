@@ -1,0 +1,168 @@
+\begin{hxmodule2}{LineRaycast}{raycasting of a line set or a spatial graph}
+
+\hxlabel{HxLineRaycast}
+\hxpackname{amira}
+
+\begin{hxdescription}
+    This module displays objects that implements the LineSet or the SpatialGraph interface.
+    The rendering is done by a GPU based raycasting. Tubes are used for the line segments
+    and spheres for the ending and nodes. In order to colorize and scale the lines, it is
+    possible to use one of the data values given per vertex for line sets and attributes and
+    labels for spatial graphs. Depending on the input the ports have differrent labels and
+    properties. While for line sets the ports starts with the words {\em lines}, {\em ending}
+    and {\em nodes}, for spatial graphs the notation {\em edges}, {\em nodes} and {\em points}
+    will be used. Because the rendering works with geometry shaders the module requires at
+    least a NVidia Geforce 8600 or compareable grpahics card. 
+%    Note, that on windows systems
+%    the driver could crash because of too long rendering.
+
+\end{hxdescription}
+
+\begin{hxconnections}
+\hxlabel{HxLineRaycast_data}
+\hxport{Data}{\tt [required]}\\
+    The line set or spatial graph to be displayed.
+
+\hxport{Line colormap}{\tt [optional]}\\
+    The colormap used for line segments or spatial graph edges.
+
+\hxport{Ending colormap}{\tt [optional]}\\
+    The colormap used for line ending or spatial graph nodes.
+
+\hxport{Node colormap}{\tt [optional]}\\
+    The colormap used for line nodes or spatial graph points.
+
+\end{hxconnections}
+
+\begin{hxports}
+\hxlabel{HxLineRaycast_display}
+\hxport{Display}\\
+\hximage{HxLineRaycast_display}\\
+    Allows to choose which elements of the line set or spatial graph will be
+    displayed. The corresponding ports will be shown and hide.
+
+\hxlabel{HxLineRaycast_lineRadius}
+\hxport{Line radius / Edge radius}\\
+\hximage{HxLineRaycast_lineRadius}\\
+    One can use a data value for the radii of the tubes for linesets or an
+    attribute for spatial graphs. If no additional values or attributes are
+    present, only {\em constant} radii will be available.
+
+\hxlabel{HxLineRaycast_lineRadiusScale}
+\hxport{Line radius scale / Edge radius scale}\\
+\hximage{HxLineRaycast_lineRadiusScale}\\
+    Scale factor of the line segments or spatial graph edges.
+
+\hxlabel{HxLineRaycast_lineColor}
+\hxport{Line color / Edge color}\\
+\hximage{HxLineRaycast_lineColor}\\
+    Sets the color of the line segments. One can choose between {\em none},
+    {\em constant} and a data value of the lineset. If {\em none} is selected a
+    default grey will be used. The {\em constant} selection shows a port where
+    you can choose the color. And if a data value is selected a colormap will be
+    used for a per vertex coloring.\\
+\hximage{HxLineRaycast_lineColor2}\\
+    Nearly the same like for line segments with the use of edge and point attributes
+    instead of data values. If an attribute has labels, one can use the label colors
+    by switch on the check box {\em label}.
+
+\hxlabel{HxLineRaycast_lineConstColor}
+\hxport{Line color / Edge color}\\
+\hximage{HxLineRaycast_lineConstColor}\\
+    Determines the {\em constant} color of the line segments or spatial graph edges.
+
+\hxlabel{HxLineRaycast_lineColormap}
+\hxport{Line colormap \ Edge colormap}\\
+\hximage{HxLineRaycast_lineColormap}\\
+    The colormap for the line segments or the spatial graph edges.
+
+\hxlabel{HxLineRaycast_lineOptions}
+\hxport{Line options / Egde options}\\
+\hximage{HxLineRaycast_lineOptions}\\
+    Sets segment options. The {\em smooth normals} check box allows to decide
+    whether normal interpolation between the segments will be used or not. If
+    {\em smooth bends} is selected, spheres will be diplayed at the change of
+    line segments where the angle between the segments becomes smaller than a
+    given value.
+
+\hxlabel{HxLineRaycast_lineBendAngle}
+\hxport{Line bend angle / Edge bend angle}\\
+\hximage{HxLineRaycast_lineBendAngle}\\
+    Controls the angle for the smooth bends. The port will be hide if
+    {\em smooth bends} is off.
+
+\hxlabel{HxLineRaycast_endingRadius}
+\hxport{Ending radius / Node radius}\\
+\hximage{HxLineRaycast_endingRadius}\\
+    If {\em adapt to lines} is on, the size of the spheres will be determined by
+    the radii values of the line segments. Otherwise one can choose {\em constant}
+    radius or data value depending radii for the ending.\\
+\hximage{HxLineRaycast_endingRadius2}\\
+    For spatial graphs one can choose a node attribute as radius. 
+
+\hxlabel{HxLineRaycast_endingRadiusScale}
+\hxport{Ending radius scale / Node radius scale}\\
+\hximage{HxLineRaycast_endingRadiusScale}\\
+    Scale factor for the line ending or spatial graph nodes. 
+
+\hxlabel{HxLineRaycast_endingColor}
+\hxport{Ending color / Node color}\\
+\hximage{HxLineRaycast_endingColor}\\
+    Similar to the radius, the {\em adapt to lines} check box allows to set the
+    color options of the line segments to the ending colors. If {\em adapt to lines}
+    is off, one can choose between the same color options like for \link{HxLineRaycast_lineColor}{lines}.\\
+\hximage{HxLineRaycast_endingColor2}\\
+    Sets the color value for the spatial graph nodes analogue to the \link{HxLineRaycast_lineColor}{edges}.
+
+\hxlabel{HxLineRaycast_endingConstColor}
+\hxport{Ending color / Node color}\\
+\hximage{HxLineRaycast_endingConstColor}\\
+    Determines the {\em constant} color of the line ending or spatial graph nodes.
+
+\hxlabel{HxLineRaycast_endingColormap}
+\hxport{Ending colormap / Node colormap}\\
+\hximage{HxLineRaycast_endingColormap}\\
+    The colormap for the line ending or the spatial graph nodes.
+
+\hxlabel{HxLineRaycast_nodeRadius}
+\hxport{Node radius / Point radius}\\
+\hximage{HxLineRaycast_nodeRadius}\\
+    One can choose between data value depending radii or {\em constant} radius for the
+    line node spheres. If the input is a spatial graph, an attribute can be used as
+    point radius.
+
+\hxlabel{HxLineRaycast_nodeRadiusScale}
+\hxport{Node radius scale / Point radius scale}\\
+\hximage{HxLineRaycast_nodeRadiusScale}\\
+    Scale factor for the line node or spatial graph point radii
+
+\hxlabel{HxLineRaycast_nodeColor}
+\hxport{Node color / Point color}\\
+\hximage{HxLineRaycast_nodeColor}\\
+    Similar to \link{HxLineRaycast_endingColor}{ending color} for the line nodes.\\
+\hximage{HxLineRaycast_nodeColor2}\\
+    Analogue to \link{HxLineRaycast_lineColor}{edge color} for the spatial graph
+    nodes. There is an extra checkbox {\em edges} which allows to adapt the colors
+    to the edge color.
+
+\hxlabel{HxLineRaycast_nodeConstColor}
+\hxport{Node color / Point color}\\
+\hximage{HxLineRaycast_nodeConstColor}\\
+     Determines the {\em constant} color of the line nodes or spatial graph points.
+
+\hxlabel{HxLineRaycast_nodeColormap}
+\hxport{Node colormap / Point colormap}\\
+\hximage{HxLineRaycast_nodeColormap}\\
+    The colormap for the line nodes or spatial graph points.
+
+\hxlabel{HxLineRaycast_options}
+\hxport{Options}\\
+\hximage{HxLineRaycast_options}\\
+    Allows to switch on and off automatic radius scale. The values of
+    the radius scale ports will be set automatically when changing radius
+    ports or initial with a new line set. This allows a fast configuration
+    of the module but is sometimes undesirable.
+
+\end{hxports}
+
+\end{hxmodule}

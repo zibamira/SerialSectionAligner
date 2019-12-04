@@ -1,0 +1,17 @@
+# This package collects utilities for hxmicrotubuleextraction and related
+# packages.  Ideally, the related packages would have few dependencies that are
+# all fully covered by tests.  See hxmicrotubuleextraction/Package for more
+# details.
+#
+# The package should only contain tested production code.
+
+set LABELS {
+    microtubules
+}
+
+set LIBS {
+    qt
+
+    mclib
+    hxcore
+}

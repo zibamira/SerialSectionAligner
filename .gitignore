@@ -1,1 +1,11 @@
 .DS_Store
+/bin/
+/lib/
+/obj/
+/product/
+/setupcache/
+/share/
+GNUmakefile
+Makefile
+api.h
+init.cpp

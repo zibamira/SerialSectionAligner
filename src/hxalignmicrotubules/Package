@@ -1,0 +1,62 @@
+set PACKAGE {hxalignmicrotubules}
+set LABELS {microtubulestitching spatialgraph}
+
+set LIBS {
+    pointmatching
+    hxspatialgraph
+    hxneuroneditor
+    hxspreadsheet
+    hxcore
+    hxworkroom
+    amiramesh
+    mclib
+    qt
+    oiv
+    tcl
+    opengl
+    hxfield
+    hxlines
+    hxtemplatematchingutil
+    hxlandmark
+    mcla
+    openmp
+    ipopt
+    mpirxx
+    mpir
+    dai
+}
+
+# `WINDOWS` is required for libdai
+set DEFINES-Win {
+    WINDOWS
+    HAVE_CONFIG_H
+}
+
+# Required for libdai
+set DEFINES-MacX {
+    MACOSX
+}
+
+set SRC {
+    *.cpp
+    mtalign/*.cpp
+    attic/*.cpp
+}
+
+set INCLUDES {
+    ../../include/
+}
+
+set INCLUDES-Win {
+    ../../include/arch-Win64VC12/
+}
+
+set INCLUDES-LinuxAMD64 {
+    ../../include/arch-LinuxAMD64/
+}
+
+set INCSRC {
+    *.h
+    mtalign/*.h
+    attic/*.h
+}

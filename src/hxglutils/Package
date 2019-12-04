@@ -1,0 +1,13 @@
+set PACKAGE {hxglutils}
+
+
+set LIBS {
+    hxcore
+    hxcolor
+    mclib
+    mclibthreaded
+    mcgl
+    opengl
+    oiv
+    qt
+}

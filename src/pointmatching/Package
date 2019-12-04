@@ -1,0 +1,5 @@
+set PACKAGE {pointmatching}
+
+
+set LIBS {mclib hxgraphalgorithms hxcore qt}
+

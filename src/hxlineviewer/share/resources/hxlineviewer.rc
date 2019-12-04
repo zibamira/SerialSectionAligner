@@ -1,0 +1,39 @@
+if { [__isProduct "AmiraZIBEdition"] } {
+
+module -name "LineRaycast" \
+       -primary "HxLineSetInterface HxCurve HxSpatialGraphInterface" \
+       -class "HxLineRaycast" \
+       -category "Main Display" \
+       -package "hxlineviewer"
+
+module -name "Material" \
+       -primary "HxLineRaycast" \
+       -category "Main" \
+       -proc { $PRIMARY material connect [ create HxModuleMaterial ] } 
+
+module -name       "Material"\
+       -primary    ""\
+       -class      "HxModuleMaterial"\
+       -category   "Main Display"\
+       -package    "hxlineviewer"
+
+} else {
+
+module -name "LineRaycast" \
+       -primary "HxLineSetInterface HxCurve HxSpatialGraphInterface" \
+       -class "HxLineRaycast" \
+       -category "{Experimental>Display}" \
+       -package "hxlineviewer"
+
+module -name "Material" \
+       -primary "HxLineRaycast" \
+       -category "{Experimental>Main}" \
+       -proc { $PRIMARY material connect [ create HxModuleMaterial ] } 
+
+module -name       "Material"\
+       -primary    ""\
+       -class      "HxModuleMaterial"\
+       -category   "{Experimental>Display}"\
+       -package    "hxlineviewer"
+
+}

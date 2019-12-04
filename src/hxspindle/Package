@@ -1,0 +1,39 @@
+set PACKAGE {hxspindle}
+
+set LIBS {
+    hxalignmicrotubules
+    hxcolor
+    hxdistmap
+    hxfield
+    hxglutils
+    hxlines
+    hxskeleton2
+    hxspatialgraph
+    hxspreadsheet
+    hxsurface
+    hxtetra
+    hxcluster
+    hxlineviewer
+    hxsurftools
+    hxcore
+    hxcoremodules
+    hxvolumeviz
+    hxplot
+    anna
+    amiramesh
+    mcgl
+    opengl
+    openmp
+    mclib
+    mclibthreaded
+    qt
+    oiv
+}
+
+set SHARE {
+    share/shaders/hxspindle/*.vert
+    share/shaders/hxspindle/*.geom
+    share/shaders/hxspindle/*.frag
+    share/resources/*.rc
+    share/xml/HxSerialSectionAligner_config.xml
+}

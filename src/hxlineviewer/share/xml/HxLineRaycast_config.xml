@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="HxLineRaycast">
+    <port portName="data"/>
+    <port portName="material"/>
+    <port portName="display"/>
+    <group name="Segment Properties" expandedByDefault="true">
+        <port portName="lineRadius"/>
+        <port portName="lineRadiusScale"/>
+        <port portName="lineColor"/>
+        <port portName="lineConstColor"/>
+        <port portName="lineColormap"/>
+        <port portName="lineOptions" advanced="true"/>
+        <port portName="lineBendAngle" advanced="true"/>
+    </group>
+    <group name="Vertex Properties" expandedByDefault="true">
+        <port portName="endingRadius"/>
+        <port portName="endingRadiusScale"/>
+        <port portName="endingColor"/>
+        <port portName="endingConstColor"/>
+        <port portName="endingColormap"/>
+    </group>
+    <group name="Node Properties" expandedByDefault="true">
+        <port portName="nodeRadius"/>
+        <port portName="nodeRadiusScale"/>
+        <port portName="nodeColor"/>
+        <port portName="nodeConstColor"/>
+        <port portName="nodeColormap"/>
+    </group>
+    <group name="Advanced" expandedByDefault="true">
+        <port portName="options"/>
+        <port portName="glowFunc"/>
+        <port portName="glow"/>
+        <port portName="exportDetail" advanced="true"/>
+        <port portName="exportSurface" advanced="true"/>
+    </group>
+</module>

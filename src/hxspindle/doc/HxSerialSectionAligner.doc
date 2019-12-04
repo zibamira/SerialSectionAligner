@@ -1,0 +1,228 @@
+\begin{hxmodule2}{SerialSectionAligner}{PUT ONE SENTENCE SUMMARY HERE}
+
+\hxlabel{HxSerialSectionAligner}
+\hxfeatureid{HxSerialSectionAligner}
+
+\begin{hxdescription}
+  The Serial Section Aligner allows users to stitch multiple serial sections
+  with filament data. The sections are aligned to remove distortions and the
+  filaments are matched over section boundaries.
+
+  The tool has a separate rendering and interaction pipeline. Thus, all other
+  viewer modules should by hidden when using the tool.
+
+  The full navigation and interaction within the different views is done by
+  interaction tool (the arrow icon). With the left mouse button pressed you can
+  move the data. To zoom, press the left mouse button together with the mouse
+  wheel button while moving the mouse up and down.
+
+  One can switch between different pairs of neighboring sections either by using
+  the slider Section Interface or when in alignment mode by a click into a section
+  of the stack in the bottom right viewer. In several views a slice of the two
+  sections is shown. There are two sliders to change the currently visualized
+  slices in the upper and in the lower section Slice Position Top and Slice Position
+  Bottom. By default the sliders are synchronized, which means by increasing the
+  upper slider, the lower is decreased. One can deactivate the synchronization in
+  the advanced settings.
+
+  The tool consists of two modes, the alignment mode and the matching mode.
+
+  \textbf{Alignment Mode}
+
+  This mode serves the primary purpose to set manual landmarks for a rough alignment
+  based on macroscopic features (e.g. vesicles). Here the viewer contains the
+  following information. In the top left one can see a slice of the upper section
+  and in the bottom left a slice of the lower section. The top right view shows a
+  blending of the two selected slices to support the alignment process. In the bottom
+  right one can find an illustration of the stack. The two neighboring sections
+  highlighted in yellow and blue are currently selected.
+
+  One can add manual landmarks (red) with a left click into one of the left views
+  while holding ctrl on the keyboard. One can move landmarks by selecting them with
+  the left mouse button and holding the button during moving. Furthermore, a landmark
+  can be removed with a click on it while holding again ctrl. During the creation and
+  movement of landmarks, the overlay view is immediately updated and shows the current
+  state of the alignment.
+
+  \textbf{Matching Mode}
+
+  This mode allows you to set matchings between filaments of neighboring sections.
+  The viewer now contains the following information. The top right viewer is similar
+  to its representation in Alignment Mode and again shows a blending of the two
+  selected slices. Matched filaments can be identified by their color, while unmatched
+  filaments appear in black. The viewer also contains a crosshair. The crosshair
+  corresponds to the two viewers on the left. The upper view shows a local part of
+  the filament data set in 3D and the lower shows a side view of the two sections.
+  The range of the 3D view can be modified in the advanced settings. The lower right
+  viewer contains a graphical representation of the matching states based on the lower
+  slice. Dark regions contain no matched filaments, slightly brighter regions contain
+  automatically matched but unconfirmed filaments and bright regions contain confirmed
+  matches of filaments.
+
+  One can edit matching manually in the top right view. Two left mouse clicks with
+  pressed ctrl on two filament ends of both sections will either add or remove the
+  corresponding matching. Note that some filaments can be matched multiple times because
+  their start and end is connected to the other section.
+
+  The automatic matching algorithm is executed with the compute button based on the
+  current alignment state. The automatic landmarks checkbox controls whether prior to
+  the automatic matching additional landmarks are placed at the filament endpoints and
+  are aligned automatically. Automatic landmarks will afterwards also become visible
+  and controllable in alignment mode. The clear button clears matches and optionally
+  also automatic landmarks if the checkbox is selected.
+
+  The controls after Matching Check allow to randomly step through the array of the
+  filament endpoints in the lower slice (use shortcut n for >). Note that the
+  crosshair adjusts by aligning one axis along the direction of the filament in the
+  lower slice. Filament ends can also be selected from the viewer by left clicking
+  on them. The Confirm button (or shortcut c) will confirm the filement end state.
+  Thus, the match and the corresponding landmarks are even kept when the automatic
+  matches are cleared. After confirming a match while stepping using the < and > buttons,
+  the viewer will randomly jump to a new position in the array and stepping back is not
+  possible anymore. Note that all manual matched end points are automatically confirmed.
+  To reset all status information type SerialSectionAligner clearCheck into the console.
+  However, this should be only used in extreme cases.
+
+  As mentioned above manually placed matching will also create landmarks of the type
+  "manual matches" and are used for alignment. In some data sets this has shown to
+  create strong local distortions especially in case of filament crossing the boundary
+  at a flat angle. The creation of these landmarks can be inhibited by selecting the
+  matched endpoint of the bottom section and using the shortcut f.
+
+  Note that shortcuts are only available when the viewer is active, i.e. after the
+  viewer was selected by interaction.
+
+  To clear all alignment and matching information of the current selected interface,
+  type SerialSectionAligner clear into the console. However, this should be only used
+  in extreme cases.
+
+  In the lower right view, one can see small histograms over time that show the density
+  of microtubule end points in z-direcion. The first two bars correspond to the second
+  half of the lower section and the other two bars correspond to the first half of the
+  upper section. The histogram is computed only for the overlapping parts, thus it can
+  help to analyze the quality of the current matching. The same histogram for the full
+  stack is shown in the alignment view.
+
+\end{hxdescription}
+
+\begin{hxconnections}
+\hxlabel{HxSerialSectionAligner_data}
+\hxport{Data}{\tt [required]}\\
+  A Serial Section Stack that contains multiple 3D volume sections
+  and for each section a filament data set.
+
+\end{hxconnections}
+
+\begin{hxports}
+\hxlabel{HxSerialSectionAligner_mode}
+\hxport{Mode}\\
+\hximage{HxSerialSectionAligner_mode}\\
+  Switch betweeen alignement and matching mode.
+
+\hxlabel{HxSerialSectionAligner_sectionInterface}
+\hxport{Section Interface}\\
+\hximage{HxSerialSectionAligner_sectionInterface}\\
+  Selects the interface beween two neighboring sections that should
+  be investigated.
+
+\hxlabel{HxSerialSectionAligner_slicePositionTop}
+\hxport{Slice Position Top}\\
+\hximage{HxSerialSectionAligner_slicePositionTop}\\
+  Sets the z-position of the slice in the top section.
+
+\hxlabel{HxSerialSectionAligner_slicePositionBottom}
+\hxport{Slice Position Bottom}\\
+\hximage{HxSerialSectionAligner_slicePositionBottom}\\
+  Sets the z-position of the slice in the bottom section.
+
+\hxlabel{HxSerialSectionAligner_filamentScale}
+\hxport{Filament Scale}\\
+\hximage{HxSerialSectionAligner_filamentScale}\\
+  Sets the scale size of the filament thickness.
+
+\hxlabel{HxSerialSectionAligner_synchronizeSlices}
+\hxport{Synchronize Slices}\\
+\hximage{HxSerialSectionAligner_synchronizeSlices}\\
+  Allows users to synchronize the z-positions of the
+  top and bottom section (per default switched on).
+
+\hxlabel{HxSerialSectionAligner_sliceQuality}
+\hxport{Slice Quality}\\
+\hximage{HxSerialSectionAligner_sliceQuality}\\
+  Selects the quality for the warping of the alignment
+  in the real-time preview. A higher number reduces
+  warping distortions but is computationally more demanding.
+
+\hxlabel{HxSerialSectionAligner_sliceQualityInteract}
+\hxport{Slice Quality Interaction}\\
+\hximage{HxSerialSectionAligner_sliceQualityInteract}\\
+  Sets the quality for the slice rendering during user
+  interaction (e.g. moving the slice).
+
+\hxlabel{HxSerialSectionAligner_warpingQuality}
+\hxport{Warping Quality}\\
+\hximage{HxSerialSectionAligner_warpingQuality}\\
+  Sets the quality for the slice rendering.
+
+\hxlabel{HxSerialSectionAligner_landmarkScale}
+\hxport{Landmark Scale}\\
+\hximage{HxSerialSectionAligner_landmarkScale}\\
+  Sets the scale for the size of the landmarks.
+
+\hxlabel{HxSerialSectionAligner_landmarkShow}
+\hxport{Landmark Show}\\
+\hximage{HxSerialSectionAligner_landmarkShow}\\
+  Shows the warping grid for the alignment (only for debugging).
+
+\hxlabel{HxSerialSectionAligner_deleteLandmarks}
+\hxport{Landmarks Delete}\\
+\hximage{HxSerialSectionAligner_deleteLandmarks}\\
+  Allows users to delete landmarks.
+
+\hxlabel{HxSerialSectionAligner_matchingRegion}
+\hxport{Matching Region}\\
+\hximage{HxSerialSectionAligner_matchingRegion}\\
+  Sets the z-region for the filament ends that should be matched.
+  The region is given in the range from [0,1] where a value of
+  0.4 means 40 percent of the top from the bottoom section and
+  40 percent of the bottom from the top section.
+
+\hxlabel{HxSerialSectionAligner_matching}
+\hxport{Matching}\\
+\hximage{HxSerialSectionAligner_matching}\\
+  Allows to compute an automatic matching or to clear the automatic
+  matching. Furthermore, one can dicide if the algorithm should
+  automatically generate landmarks.
+
+\hxlabel{HxSerialSectionAligner_matchingCheck}
+\hxport{Matching Check}\\
+\hximage{HxSerialSectionAligner_matchingCheck}\\
+  Allows to step over the filament ends in the matching reagion of
+  the bottom section to validate the current result.
+
+\hxlabel{HxSerialSectionAligner_cutRadius}
+\hxport{Cut Radius}\\
+\hximage{HxSerialSectionAligner_cutRadius}\\
+  Selects the radius for the 3D view.
+
+\hxlabel{HxSerialSectionAligner_selectSection}
+\hxport{Select Section}\\
+\hximage{HxSerialSectionAligner_selectSection}\\
+  Selects the section which is used as base for the stack creation,
+  and thus, is kept undeformed.
+
+\hxlabel{HxSerialSectionAligner_computeStack}
+\hxport{Compute Stack}\\
+\hximage{HxSerialSectionAligner_computeStack}\\
+  Computes the final stack. One can dicide if only the filament stack
+  should be generated (very fast) or if the tomgrams should be processed,
+  too, which takes much more time.
+
+\hxlabel{HxSerialSectionAligner_voxelSizeXY}
+\hxport{Voxel Size X-Y}\\
+\hximage{HxSerialSectionAligner_voxelSizeXY}\\
+  Selects the voxel size in x-y-direction for the final stack.
+
+\end{hxports}
+
+\end{hxmodule2}

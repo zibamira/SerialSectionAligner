@@ -1,0 +1,7 @@
+set PACKAGE {hxgraphalgorithms}
+
+
+set LIBS {qt mclib}
+
+set SHARE {
+}

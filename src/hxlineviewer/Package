@@ -1,0 +1,35 @@
+set PACKAGE {hxlineviewer}
+
+set LABELS { NeuroReconstruct}
+
+set LIBS {
+    hxcolor
+    hxfield
+    hxglutils
+    hxlines
+    hxspatialgraph
+    hxsurface
+    hxcore
+    anna
+    amiramesh
+    mcgl
+    opengl
+    mclib
+    mclibthreaded
+    qt
+    oiv
+}
+
+set SHARE {
+    share/shaders/hxlineviewer/*.vert
+    share/shaders/hxlineviewer/*.geom
+    share/shaders/hxlineviewer/*.frag
+    share/resources/*.rc
+    share/xml/HxLineRaycast_config.xml
+}
+
+set TESTLIBS { gtest }
+
+set TESTSRC {
+    *Test.cpp
+}

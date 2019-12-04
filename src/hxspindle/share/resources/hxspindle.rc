@@ -1,0 +1,21 @@
+dataClass -name "SerialSectionStack" \
+          -class "HxSerialSectionStack" \
+          -category "Data" \
+          -package "hxspindle"
+
+amiramesh -ContentType HxSerialSectionStack \
+          -load "HxSerialSectionStack::readAmiraMesh" \
+          -package "hxspindle"
+
+dataFile -name "AmiraMesh HxSerialSectionStack" \
+         -ext "am" \
+         -save "HxSerialSectionStack::saveAmiraMesh" \
+         -type "HxSerialSectionStack" \
+         -package "hxspindle"
+
+module -name "SerialSectionAligner" \
+       -primary "HxSerialSectionStack" \
+       -class "HxSerialSectionAligner" \
+       -category "Main Display" \
+       -package "hxspindle"
+       

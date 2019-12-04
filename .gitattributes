@@ -1,0 +1,5 @@
+*.doc filter= diff= merge= text
+*.jpg filter= diff= merge= -text
+*.png filter= diff= merge= -text
+*.tar.bz2 filter=lfs diff=lfs merge=lfs -text
+*.zip filter=lfs diff=lfs merge=lfs -text

@@ -1,0 +1,5 @@
+set PACKAGE {hxskeleton2}
+
+
+set LIBS {hxcore mclib hxfield hxsurface hxlines hxcluster hxlatticex hxlatticexbase hxlatticefactory qt}
+

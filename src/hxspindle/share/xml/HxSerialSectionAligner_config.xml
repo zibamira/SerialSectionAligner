@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="module_name">
+    <port portName="data"/>
+    <port portName="mode"/>
+    <group name="General Properties" expandedByDefault="true">
+        <port portName="sectionInterface"/>
+        <port portName="slicePositionTop"/>
+        <port portName="slicePositionBottom"/>
+        <port portName="filamentScale"/>
+        <port portName="synchronizeSlices" advanced="true"/>
+        <port portName="sliceQuality" advanced="true"/>
+        <port portName="sliceQualityInteract" advanced="true"/>
+        <port portName="warpingQuality" advanced="true"/>
+    </group>
+    <group name="Landmark Properties" expandedByDefault="true">
+        <port portName="landmarkScale"/>
+        <port portName="landmarkShow" advanced="true"/>
+        <port portName="deleteLandmarks"/>
+    </group>
+    <group name="Matching Properties" expandedByDefault="true">
+        <port portName="matching"/>
+        <port portName="matchingRegion"/>
+        <port portName="matchingCheck"/>
+        <port portName="cutRadius" advanced="true"/>
+    </group>
+    <group name="Stack Properties" expandedByDefault="true">
+        <port portName="selectSection"/>
+        <port portName="computeStack"/>
+        <port portName="voxelSizeXY"/>
+    </group>
+</module>
