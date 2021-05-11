@@ -942,6 +942,17 @@ void SoSerialSectionAligner::showWarpingGrid()
 
 
 
+void SoSerialSectionAligner::touchMT()
+{
+    mMTDynamic.touch();
+    mMTStatic[0].touch();
+    mMTStatic[1].touch();
+    mMTWarped.touch();
+}
+
+
+
+
 void SoSerialSectionAligner::updateEndPointDensities()
 {
     float area = SpindleTools::computeIntersectionArea(*mField[0], *mField[1], mMLS, 10);

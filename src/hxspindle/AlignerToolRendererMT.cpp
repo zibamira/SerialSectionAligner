@@ -652,6 +652,14 @@ void AlignerToolRendererMT::setSize(int size, int reserve)
 
 
 
+void AlignerToolRendererMT::touch()
+{
+    mUpdate = true;
+}
+
+
+
+
 void AlignerToolRendererMT::update()
 {
     if (!mUpdate) return;

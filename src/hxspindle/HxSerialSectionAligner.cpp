@@ -537,12 +537,14 @@ static void smoothLandmarks(HxSerialSectionStack::Landmarks& landmarks)
 
 HxSerialSectionAligner::HxSerialSectionAligner(void)
     : HxModule(HxSerialSectionStack::getClassTypeId())
+    , connMatchingColors(this, "matchingColors", tr("Matching Colors"), HxColormap::getClassTypeId())
     , portMode(this, "mode", tr("Mode"), 2)
     , portSectionInterface(this, "sectionInterface", tr("Section Interface"))
     , portSliceTop(this, "slicePositionTop", tr("Slice Position Top"))
     , portSliceBottom(this, "slicePositionBottom", tr("Slice Position Bottom"))
     , portFilamentScale(this, "filamentScale", tr("Filament Scale"))
     , portSynchronizeSlices(this, "synchronizeSlices", tr("Synchronize Slices"))
+    , portColorBlind(this, "colorBlind", tr("Color Blind"))
     , portSliceQuality(this, "sliceQuality", tr("Slice Quality"))
     , portSliceQualityInteraction(this, "sliceQualityInteract", tr("Slice Quality Interaction"))
     , portWarpingQuality(this, "warpingQuality", tr("Warping Quality"))
@@ -585,6 +587,10 @@ HxSerialSectionAligner::HxSerialSectionAligner(void)
     portSynchronizeSlices.setLabel(0, "");
     portSynchronizeSlices.setValue(0, true);
 
+    portColorBlind.setNum(1);
+    portColorBlind.setLabel(0, "");
+    portColorBlind.setValue(0, false);
+
     portSliceQuality.setNum(3);
     portSliceQuality.setLabel(0, "high");
     portSliceQuality.setLabel(1, "medium");
@@ -596,7 +602,6 @@ HxSerialSectionAligner::HxSerialSectionAligner(void)
     portSliceQualityInteraction.setLabel(1, "medium");
     portSliceQualityInteraction.setLabel(2, "low");
     portSliceQualityInteraction.setValue(1);
-
 
     portWarpingQuality.setMinMax(3, 20);
     portWarpingQuality.setValue(10);
@@ -828,6 +833,31 @@ void HxSerialSectionAligner::compute()
         // initialize endpoint densities
     }
 
+    // set new matching colors
+    if (connMatchingColors.isNew())
+    {
+        HxColormap* colorMap = hxconnection_cast< HxColormap >(connMatchingColors);
+
+        if (colorMap)
+            HxSerialSectionStack::Matching::setColors(colorMap);
+        else
+            HxSerialSectionAligner::Matching::setDefaultColors(portColorBlind.getValue(0));
+
+        if (mSerialSectionStack)
+        {
+            int numInterfaces = mSerialSectionStack->getNumSections() - 1;
+
+            for (int i = 0; i < numInterfaces; ++i)
+            {
+                mSerialSectionStack->getSectionInterface(i).mMatching.resetColors();
+            }
+        }
+
+        mAlignerTool->touch();
+        mAlignerTool->touchMT();
+    }
+
+
     if (mAlignerTool == NULL) return;
 
     if (mSerialSectionStack == NULL) return;
@@ -923,6 +953,31 @@ void HxSerialSectionAligner::compute()
     if (portWarpingQuality.isNew())
     {
         mAlignerTool->setWarpingQuality(portWarpingQuality.getValue());
+    }
+
+    // anable / disable color blind colors
+
+    if (portColorBlind.isNew())
+    {
+        HxColormap* colorMap = hxconnection_cast< HxColormap >(connMatchingColors);
+
+        if (!colorMap)
+        {
+            HxSerialSectionAligner::Matching::setDefaultColors(portColorBlind.getValue(0));
+
+            if (mSerialSectionStack)
+            {
+                int numInterfaces = mSerialSectionStack->getNumSections() - 1;
+
+                for (int i = 0; i < numInterfaces; ++i)
+                {
+                    mSerialSectionStack->getSectionInterface(i).mMatching.resetColors();
+                }
+            }
+
+            mAlignerTool->touch();
+            mAlignerTool->touchMT();
+        }
     }
 
     // changes the scale of the landmark rendering

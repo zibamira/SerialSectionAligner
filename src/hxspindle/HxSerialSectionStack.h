@@ -18,7 +18,7 @@
 
 
 class HxUniformScalarField3;
-
+class HxColormap;
 
 
 
@@ -339,6 +339,27 @@ class HXSPINDLE_API HxSerialSectionStack : public HxSpatialData {
 
 
                 /**
+                    Recomputes the colors depending on the matching type.
+                    Needs to be called when new matching colors are selected.
+                */
+                void resetColors();
+
+
+                /**
+                    Set colors by colormap. The first third is used
+                    for the manual matchings and the last third of the
+                    colormap for the automatic matchings.
+                */
+                static void setColors(HxColormap* colorMap);
+
+
+                /**
+                    Sets the default colr.
+                */
+                static void setDefaultColors(bool colorBlindSafe = true);
+
+
+                /**
                     Sets the state of a filament end
                 */
                 void setState(FilamentEndState state, int filamentID, int end, int section);
@@ -394,6 +415,9 @@ class HXSPINDLE_API HxSerialSectionStack : public HxSpatialData {
 
                 McDArray< FilamentEndState > mFilamentEndState[2];
                 McDArray< bool >             mFilamentEndForbidLandmarks[2];
+
+                static McDArray< McVec3f >   mColorsAutomatic;
+                static McDArray< McVec3f >   mColorsManual;
         };
 
 

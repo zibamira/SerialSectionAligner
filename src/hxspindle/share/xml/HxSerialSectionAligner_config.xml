@@ -8,6 +8,7 @@
         <port portName="slicePositionBottom"/>
         <port portName="filamentScale"/>
         <port portName="synchronizeSlices" advanced="true"/>
+        <port portName="colorBlind" advanced="true"/>
         <port portName="sliceQuality" advanced="true"/>
         <port portName="sliceQualityInteract" advanced="true"/>
         <port portName="warpingQuality" advanced="true"/>

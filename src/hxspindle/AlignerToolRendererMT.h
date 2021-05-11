@@ -99,6 +99,9 @@ class HXSPINDLE_API AlignerToolRendererMT
         void setRadius(float radius);
 
 
+        void touch();
+
+
     private:
 
 

@@ -1,6 +1,7 @@
 #include "HxSerialSectionStack.h"
 
 #include <hxcore/HxBase.h>
+#include <hxcolor/HxColormap.h>
 #include <hxcore/internal/HxReadAmiraMesh.h>
 #include <hxcore/internal/HxWorkArea.h>
 #include <hxcore/HxMessage.h>
@@ -814,6 +815,12 @@ void HxSerialSectionStack::Landmarks::transformInv(mtalign::WarpResult& warpResu
 
 
 
+McDArray< McVec3f > HxSerialSectionStack::Matching::mColorsAutomatic;
+McDArray< McVec3f > HxSerialSectionStack::Matching::mColorsManual;
+
+
+
+
 void HxSerialSectionStack::Matching::add(const McVec2i& filamentEnd1, const McVec2i& filamentEnd2)
 {
     McVec3f color = computeColor(MANUAL);
@@ -882,31 +889,16 @@ McVec3f HxSerialSectionStack::Matching::computeColor(HxSerialSectionStack::Setti
 {
     McVec3f color(0.2, 0.2, 0.2);
 
-    McVec3f redColors[6];
-
-    redColors[0].setValue(254.0 / 255.0, 178.0 / 255.0, 76.0 / 255.0);
-    redColors[1].setValue(253.0 / 255.0, 141.0 / 255.0, 60.0 / 255.0);
-    redColors[2].setValue(252.0 / 255.0,  78.0 / 255.0, 42.0 / 255.0);
-    redColors[3].setValue(227.0 / 255.0,  26.0 / 255.0, 28.0 / 255.0);
-    redColors[4].setValue(189.0 / 255.0,   0.0 / 255.0, 38.0 / 255.0);
-    redColors[5].setValue(128.0 / 255.0,   0.0 / 255.0, 38.0 / 255.0);
-
-    McVec3f greenColors[6];
-
-    greenColors[0].setValue(173.0 / 255.0, 221.0 / 255.0, 142.0 / 255.0);
-    greenColors[1].setValue(120.0 / 255.0, 198.0 / 255.0, 121.0 / 255.0);
-    greenColors[2].setValue( 65.0 / 255.0, 171.0 / 255.0,  93.0 / 255.0);
-    greenColors[3].setValue( 35.0 / 255.0, 132.0 / 255.0,  67.0 / 255.0);
-    greenColors[4].setValue(  0.0 / 255.0, 104.0 / 255.0,  55.0 / 255.0);
-    greenColors[5].setValue(  0.0 / 255.0,  69.0 / 255.0,  41.0 / 255.0);
+    if (mColorsAutomatic.size() == 0 || mColorsManual.size() == 0)
+        setDefaultColors(false);
 
     if (type == MANUAL)
     {
-        color = greenColors[rand() % 6];
+        color = mColorsManual[rand() % mColorsManual.size()];
     }
     else if (type == AUTOMATIC || type == TEMPORARY)
     {
-        color = redColors[rand() % 6];
+        color = mColorsAutomatic[rand() % mColorsAutomatic.size()];
     }
 
     return color;
@@ -1021,6 +1013,17 @@ void HxSerialSectionStack::Matching::remove(HxSerialSectionStack::SettingType ty
 
 
 
+void HxSerialSectionStack::Matching::resetColors()
+{
+    for (int i = 0; i < mMatches.size(); ++i)
+    {
+        mMatchColors[i] = computeColor(mMatchTypes[i]);
+    }
+}
+
+
+
+
 void HxSerialSectionStack::Matching::set(const McDArray< McDArray< McVec2i > >& selection, const mtalign::MatchingPGM& matching)
 {
     remove(TEMPORARY);
@@ -1038,6 +1041,72 @@ void HxSerialSectionStack::Matching::set(const McDArray< McDArray< McVec2i > >& 
     }
 }
 
+
+
+
+void HxSerialSectionStack::Matching::setColors(HxColormap* colorMap)
+{
+    if (!colorMap)
+        return;
+
+    float cMin = colorMap->minCoord();
+    float cMax = colorMap->maxCoord();
+    float s = (cMax - cMin) / 96;
+
+    mColorsAutomatic.resize(32);
+    mColorsManual.resize(32);
+
+    for (int i = 0; i < 32; ++i)
+    {
+        SbColor colAuto = colorMap->getColor(cMax - float(i) * s);
+        SbColor colManual = colorMap->getColor(cMin + float(i) * s);
+
+        mColorsAutomatic[i].setValue(colAuto[0], colAuto[1], colAuto[2]);
+        mColorsManual[i].setValue(colManual[0], colManual[1], colManual[2]);
+    }
+}
+
+
+
+
+void HxSerialSectionStack::Matching::setDefaultColors(bool colorBlindSafe)
+{
+    mColorsAutomatic.resize(6);
+    mColorsManual.resize(6);
+
+    if (colorBlindSafe)
+    {
+        mColorsAutomatic[0].setValue(142.0 / 255.0, 1.0 / 255.0, 82.0 / 255.0);
+        mColorsAutomatic[1].setValue(165.0 / 255.0, 15.0 / 255.0, 105.0 / 255.0);
+        mColorsAutomatic[2].setValue(197.0 / 255.0, 27.0 / 255.0, 125.0 / 255.0);
+        mColorsAutomatic[3].setValue(222.0 / 255.0, 119.0 / 255.0, 174.0 / 255.0);
+        mColorsAutomatic[4].setValue(241.0 / 255.0, 182.0 / 255.0, 218.0 / 255.0);
+        mColorsAutomatic[5].setValue(253.0 / 255.0, 224.0 / 255.0, 239.0 / 255.0);
+
+        mColorsManual[0].setValue(230.0 / 255.0, 245.0 / 255.0, 208.0 / 255.0);
+        mColorsManual[1].setValue(184.0 / 255.0, 225.0 / 255.0, 134.0 / 255.0);
+        mColorsManual[2].setValue(127.0 / 255.0, 188.0 / 255.0, 65.0 / 255.0);
+        mColorsManual[3].setValue(77.0 / 255.0, 146.0 / 255.0, 33.0 / 255.0);
+        mColorsManual[4].setValue(55.0 / 255.0, 125.0 / 255.0, 28.0 / 255.0);
+        mColorsManual[5].setValue(39.0 / 255.0, 100.0 / 255.0, 25.0 / 255.0);
+    }
+    else
+    {
+        mColorsAutomatic[0].setValue(254.0 / 255.0, 178.0 / 255.0, 76.0 / 255.0);
+        mColorsAutomatic[1].setValue(253.0 / 255.0, 141.0 / 255.0, 60.0 / 255.0);
+        mColorsAutomatic[2].setValue(252.0 / 255.0,  78.0 / 255.0, 42.0 / 255.0);
+        mColorsAutomatic[3].setValue(227.0 / 255.0,  26.0 / 255.0, 28.0 / 255.0);
+        mColorsAutomatic[4].setValue(189.0 / 255.0,   0.0 / 255.0, 38.0 / 255.0);
+        mColorsAutomatic[5].setValue(128.0 / 255.0,   0.0 / 255.0, 38.0 / 255.0);
+
+        mColorsManual[0].setValue(173.0 / 255.0, 221.0 / 255.0, 142.0 / 255.0);
+        mColorsManual[1].setValue(120.0 / 255.0, 198.0 / 255.0, 121.0 / 255.0);
+        mColorsManual[2].setValue(65.0 / 255.0, 171.0 / 255.0, 93.0 / 255.0);
+        mColorsManual[3].setValue(35.0 / 255.0, 132.0 / 255.0, 67.0 / 255.0);
+        mColorsManual[4].setValue(0.0 / 255.0, 104.0 / 255.0, 55.0 / 255.0);
+        mColorsManual[5].setValue(0.0 / 255.0, 69.0 / 255.0, 41.0 / 255.0);
+    }
+}
 
 
 

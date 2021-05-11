@@ -1787,11 +1787,6 @@ void AlignerToolRendererSlice::renderEndPointDensities(unsigned int contextID)
         float w =  0.05;
         float s = 0.4 / maxDensity;
 
-        glBegin(GL_LINE_LOOP);
-            glColor4f(0.0f, 0.0f, 0.0f, 1.0f);
-            renderQuad(-0.99, -0.975, 4 * 1.2 * w + 0.4 * w, 0.45);
-        glEnd();
-
         for (int i = mEndPointDensities.size() - 1; i >= 0; --i)
         {
             if ( (i + 1) % 4 == 0) x += 0.5 * w;
@@ -1799,7 +1794,14 @@ void AlignerToolRendererSlice::renderEndPointDensities(unsigned int contextID)
             float a = 0.1 * float((i) % 4);
 
             glBegin(GL_QUADS);
-                glColor4f(1.0, 0.5 + a, a, 1.0);
+                if (i >= mEndPointDensities.size() - 4)
+                    glColor4f(1.0, 0.5 + a, a, 1.0);
+                else
+                {
+                    McVec3f c1(1.0, 0.5 + a, a);
+                    McVec3f c2 = 0.5 * (c1 + McVec3f(0.1 * a));
+                    glColor4f(c2[0], c2[1], c2[2], 1.0);
+                }
                 renderQuad(x, -0.95, w, s * mEndPointDensities[i]);
             glEnd();
 

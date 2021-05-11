@@ -221,6 +221,13 @@ class HXSPINDLE_API SoSerialSectionAligner : public SoShape
 
 
         /**
+            Enforces an update of the rendering of the MT. Usually, only
+            necessary when the color of the MT's has been changed.
+        */
+        void touchMT();
+
+
+        /**
             Updates the end point histogramm for the current interface.
         */
         void updateEndPointDensities();

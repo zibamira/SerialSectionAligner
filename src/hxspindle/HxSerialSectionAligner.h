@@ -155,6 +155,7 @@ class HXSPINDLE_API HxSerialSectionAligner : public HxModule
 
     public :
 
+        HxConnection                        connMatchingColors;
 
         HxPortRadioBox                      portMode;
         HxPortIntSlider                     portSectionInterface;
@@ -162,6 +163,7 @@ class HXSPINDLE_API HxSerialSectionAligner : public HxModule
         HxPortFloatSlider                   portSliceBottom;
         HxPortFloatSlider                   portFilamentScale;
         HxPortToggleList                    portSynchronizeSlices;
+        HxPortToggleList                    portColorBlind;
         HxPortRadioBox                      portSliceQuality;
         HxPortRadioBox                      portSliceQualityInteraction;
         HxPortIntSlider                     portWarpingQuality;
