@@ -1,23 +1,10 @@
-#include <stdio.h>
-
-#include <hxlineviewer/HxLineRaycast.h>
-
-#include <Inventor/SbLinear.h>
-#include <Inventor/events/SoMouseButtonEvent.h>
-
-#include <hxcore/HxObjectPool.h>
-
-#include <hxlines/internal/HxLineSetInterface.h>
-#include <hxspatialgraph/internal/HxSpatialGraphInterface.h>
-#include <hxsurface/HxSurface.h>
-
-#include <hxlineviewer/HxModuleMaterial.h>
-
-#include <mclib/McPlane.h>
 #include <mclib/McRot.h>
-
-#include <algorithm>
-#include <string>
+#include <mclib/McPlane.h>
+#include <hxsurface/HxSurface.h>
+#include <hxcore/HxObjectPool.h>
+#include <hxlineviewer/HxLineRaycast.h>
+#include <hxlineviewer/HxModuleMaterial.h>
+#include <Inventor/events/SoMouseButtonEvent.h>
 
 namespace
 {

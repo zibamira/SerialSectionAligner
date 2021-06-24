@@ -10,8 +10,7 @@ set LABELS {
 }
 
 set LIBS {
-    qt
-
+    QtCore
     mclib
     hxcore
 }

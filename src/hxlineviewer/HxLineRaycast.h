@@ -1,28 +1,23 @@
 #pragma once
 
-#include <hxlineviewer/api.h>
-
-#include <hxcore/HxModule.h>
-#include <hxcore/HxConnection.h>
-#include <hxcore/HxPortColorList.h>
-#include <hxcore/HxPortButtonList.h>
-#include <hxcore/HxPortFloatSlider.h>
-#include <hxcore/HxPortIntSlider.h>
-#include <hxcore/HxPortText.h>
-#include <hxcore/HxPortToggleList.h>
-#include <hxcore/HxPortGeneric.h>
-
-#include <hxcolor/HxPortColormap.h>
-#include <hxcolor/internal/HxRangeSet.h>
-
-#include <mclib/McDArray.h>
-#include <mclib/McHandle.h>
-#include <mclib/McVec3.h>
 #include <mclib/McVec2.h>
-
+#include <hxcore/HxModule.h>
+#include <hxlineviewer/api.h>
+#include <hxcore/HxPortText.h>
+#include <hxcore/HxPortGeneric.h>
+#include <hxcore/HxPortIntSlider.h>
+#include <hxcore/HxPortColorList.h>
+#include <hxcolor/HxPortColormap.h>
+#include <hxcore/HxPortButtonList.h>
+#include <hxcore/HxPortToggleList.h>
 #include <Inventor/nodes/SoSeparator.h>
-
 #include <hxlineviewer/SoLineRaycast.h>
+#include <hxcolor/internal/HxRangeSet.h>
+#include <hxlines/internal/HxLineSetInterface.h>
+#include <hxspatialgraph/internal/HxSpatialGraphInterface.h>
+
+
+
 
 class HxLineSetInterface;
 class HxSpatialGraphInterface;

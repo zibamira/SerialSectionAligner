@@ -7,7 +7,7 @@
 #include <mclib/internal/McDMatrix.h>
 #include <mclib/McPlane.h>
 #include <mclib/McLine.h>
-
+#include <hxcore/HxMessage.h>
 #include <hxalignmicrotubules/mtalign/SliceSelector.h>
 #include <hxalignmicrotubules/mtalign/data.h>
 

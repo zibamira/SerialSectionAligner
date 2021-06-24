@@ -5,6 +5,7 @@
 
 #include <sstream>
 #include <iterator>
+#include <hxcore/HxMessage.h>
 
 
 namespace

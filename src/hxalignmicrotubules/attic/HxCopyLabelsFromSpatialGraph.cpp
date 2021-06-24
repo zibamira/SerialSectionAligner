@@ -1,7 +1,7 @@
 #include <hxalignmicrotubules/attic/HxCopyLabelsFromSpatialGraph.h>
 
 #include <hxspatialgraph/internal/HxSpatialGraph.h>
-
+#include <hxcore/HxMessage.h>
 #include <QString>
 
 HX_INIT_CLASS(HxCopyLabelsFromSpatialGraph, HxCompModule);

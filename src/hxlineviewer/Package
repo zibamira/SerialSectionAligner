@@ -10,14 +10,13 @@ set LIBS {
     hxspatialgraph
     hxsurface
     hxcore
-    anna
     amiramesh
-    mcgl
-    opengl
     mclib
     mclibthreaded
-    qt
-    oiv
+    QtCore
+    Inventor
+    InventorBase
+    InventorGL
 }
 
 set SHARE {
@@ -28,8 +27,3 @@ set SHARE {
     share/xml/HxLineRaycast_config.xml
 }
 
-set TESTLIBS { gtest }
-
-set TESTSRC {
-    *Test.cpp
-}

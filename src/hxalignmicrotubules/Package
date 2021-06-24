@@ -10,8 +10,11 @@ set LIBS {
     hxworkroom
     amiramesh
     mclib
-    qt
-    oiv
+    QtCore
+    QtWidgets
+    QtGui
+    Inventor
+    InventorBase
     tcl
     opengl
     hxfield

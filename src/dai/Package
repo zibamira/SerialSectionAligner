@@ -22,7 +22,7 @@
 set PACKAGE {dai}
 
 set LIBS {
-    boost
+    boost_header
     hxmatlab
     mpirxx
     mpir
@@ -42,7 +42,7 @@ set INCLUDES-LinuxAMD64 {
 
 set INCSRC {
     *.h
-    ../../include/*/*.h
+    ../../include/coin/*.h
     upstream/include/dai/*.h
 }
 

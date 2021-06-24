@@ -1,33 +1,35 @@
 set PACKAGE {hxspindle}
 
 set LIBS {
-    hxalignmicrotubules
-    hxcolor
-    hxdistmap
-    hxfield
-    hxglutils
-    hxlines
-    hxskeleton2
-    hxspatialgraph
-    hxspreadsheet
-    hxsurface
-    hxtetra
-    hxcluster
-    hxlineviewer
-    hxsurftools
-    hxcore
-    hxcoremodules
-    hxvolumeviz
-    hxplot
-    anna
-    amiramesh
-    mcgl
-    opengl
-    openmp
-    mclib
-    mclibthreaded
-    qt
-    oiv
+     hxalignmicrotubules
+     hxcolor
+     hxdistmap
+     hxfield
+     hxglutils
+     hxlines
+     hxskeleton2
+     hxspatialgraph
+     hxspreadsheet
+     hxsurface
+     hxtetra
+     hxcluster
+     hxlineviewer
+     hxsurftools
+     hxcore
+     hxcoremodules
+     hxvolumeviz
+     hxplot
+     anna
+     amiramesh
+     mcgl
+     opengl
+     openmp
+     mclib
+     mclibthreaded
+     QtCore
+     Inventor
+     InventorBase
+     InventorGL
 }
 
 set SHARE {
